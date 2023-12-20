@@ -16,7 +16,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className="{inter.className} flex flex-col justify-center">
+        <header className="flex flex-row w-full bg-mainIndigo justify-center items-center text-center self-center">
+          <h1 className="text-center text-5xl py-2">
+            Databáze filmů – Eliáš Bencúr
+          </h1>
+        </header>
+        {children}
+      </body>
     </html>
   );
 }
