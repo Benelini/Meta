@@ -68,11 +68,11 @@ const MovieDetail = ({ params }: TMovieDetail) => {
   }, [imdbID]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="self-center">Loading...</div>;
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div className="self-center">Error: {error}</div>;
   }
 
   return (
