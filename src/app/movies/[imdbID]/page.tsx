@@ -76,9 +76,9 @@ const MovieDetail = ({ params }: TMovieDetail) => {
   }
 
   return (
-    <div className="flex flex-row bg-mainIndigo justify-center items-center w-screen text-center h-[100vh]">
+    <div className="flex flex-row bg-mainIndigo justify-center items-start w-screen text-center h-[100vh]">
       {movie && (
-        <div className="flex flex-row justify-start items-center bg-darkGreen rounded-md px-4 py-4 max-w-2xl">
+        <div className="flex flex-row justify-start items-center bg-darkGreen rounded-md px-4 py-4 max-w-2xl mt-10">
           <Image
             className="mr-4 rounded-md"
             src={movie.Poster}
