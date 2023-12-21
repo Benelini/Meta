@@ -15,9 +15,23 @@ type TMovieDetail = {
 
 const MovieDetail = ({ params }: TMovieDetail) => {
   const { imdbID } = params;
-  const [movie, setMovie] = useState<TMovieLong | null>(null); // Use the Movie type for state
+  const [movie, setMovie] = useState<TMovieLong | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const addToFavorites = () => {
+    const currentFavoritesString =
+      window.localStorage.getItem("favorites") || "[]";
+    const currentFavorites = JSON.parse(currentFavoritesString);
+
+    // Check if movie is not null before adding it to the favorites
+    if (movie) {
+      const newFavorites = [...currentFavorites, movie];
+
+      // Save the updated list back to local storage
+      window.localStorage.setItem("favorites", JSON.stringify(newFavorites));
+    }
+  };
 
   useEffect(() => {
     const loadMovieDetails = async () => {
@@ -64,7 +78,10 @@ const MovieDetail = ({ params }: TMovieDetail) => {
             <h1 className="text-4xl max-sm:text-2xl font-bold text-center w-full">
               {movie.Title}
             </h1>
-            <div className="w-6"></div>
+
+            <button onClick={addToFavorites}>
+              <Favorites className="w-6 h-6 fill-white" />
+            </button>
           </div>
 
           <div className="flex flex-row items-start max-sm:flex-col max-sm:justify-center max-sm:items-center justify-start">
