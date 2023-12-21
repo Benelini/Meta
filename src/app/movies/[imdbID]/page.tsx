@@ -78,7 +78,11 @@ const MovieDetail = ({ params }: TMovieDetail) => {
   }
 
   if (error) {
-    return <div className="self-center">Error: {error}</div>;
+    return (
+      <div className="self-center h-screen bg-mainIndigo w-full justify-center items-center flex flex-col">
+        Error: {error}
+      </div>
+    );
   }
 
   return (
