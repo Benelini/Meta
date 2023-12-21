@@ -36,6 +36,7 @@ export default function Home() {
     const handler = setTimeout(() => {
       if (searchTerm) {
         fetchMovies(searchTerm);
+        window.localStorage.setItem("lastSearchTerm", searchTerm);
       } else {
         setMovieData([]);
       }
@@ -46,6 +47,13 @@ export default function Home() {
     };
   }, [searchTerm]);
 
+  useEffect(() => {
+    const lastSearchTerm = window.localStorage.getItem("lastSearchTerm");
+    if (lastSearchTerm) {
+      setSearchTerm(lastSearchTerm);
+      fetchMovies(lastSearchTerm);
+    }
+  }, []);
   return (
     <main className="flex flex-col justify-start items-center p-4 bg-mainIndigo min-h-[100vh] h-fit">
       <input
