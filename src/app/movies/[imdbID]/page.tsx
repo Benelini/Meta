@@ -100,13 +100,20 @@ const MovieDetail = ({ params }: TMovieDetail) => {
           </div>
 
           <div className="flex flex-row items-start max-sm:flex-col max-sm:justify-center max-sm:items-center justify-start">
-            <Image
-              className="mr-4 rounded-md max-sm:mr-0 max-sm:mb-4"
-              src={movie.Poster}
-              alt={movie.Title}
-              width={260}
-              height={400}
-            ></Image>
+            {movie.Poster !== "N/A" ? (
+              <Image
+                className="mr-4 rounded-md max-sm:mr-0 max-sm:mb-4"
+                src={movie.Poster}
+                alt={movie.Title}
+                width={260}
+                height={400}
+              ></Image>
+            ) : (
+              <div className="w-full h-[400px] rounded-md mr-4 max-sm:mr-0 border-2 border-white text-center items-center flex flex-col justify-center">
+                <p>No image</p>
+              </div>
+            )}
+
             <div className="flex flex-col font-bold text-left gap-1 max-sm:px-10">
               <p>{movie.Genre}</p>
               <div className="flex flex-row place-items-center gap-1">
