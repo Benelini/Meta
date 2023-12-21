@@ -1,45 +1,16 @@
 "use client";
 import BackButton from "@/app/components/svgs/back-button";
 import RatingStar from "@/app/components/svgs/rating-star";
+import Favorites from "@/app/components/svgs/favorites";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { fetchMovieLong, TMovieLong } from "@/app/utils/fetch-movie-long";
 
 type TMovieDetail = {
   params: {
     imdbID: string;
   };
-};
-
-type TMovieLong = {
-  Title: string;
-  Year: string;
-  Rated: string;
-  Released: string;
-  Runtime: string;
-  Genre: string;
-  Director: string;
-  Writer: string;
-  Actors: string;
-  Plot: string;
-  Language: string;
-  Country: string;
-  Awards: string;
-  Poster: string;
-  Ratings: Array<{
-    Source: string;
-    Value: string;
-  }>;
-  Metascore: string;
-  imdbRating: string;
-  imdbVotes: string;
-  imdbID: string;
-  Type: string;
-  DVD: string;
-  BoxOffice: string;
-  Production: string;
-  Website: string;
-  Response: string;
 };
 
 const MovieDetail = ({ params }: TMovieDetail) => {
@@ -49,25 +20,21 @@ const MovieDetail = ({ params }: TMovieDetail) => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
+    const loadMovieDetails = async () => {
+      if (imdbID) {
+        setLoading(true);
         const apiKey = process.env.NEXT_PUBLIC_OMDB_API_KEY;
-        const response = await fetch(
-          `http://www.omdbapi.com/?i=${imdbID}&plot=full&apikey=${apiKey}`
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        const fetchedMovie = await fetchMovieLong(imdbID, apiKey || "");
+        if (fetchedMovie) {
+          setMovie(fetchedMovie);
+        } else {
+          setError("Failed to load movie details.");
         }
-        const data: TMovieLong = await response.json(); // Cast the response to Movie type
-        setMovie(data);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
         setLoading(false);
       }
     };
 
-    fetchMovies();
+    loadMovieDetails();
   }, [imdbID]);
 
   if (loading) {
