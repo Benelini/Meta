@@ -82,7 +82,7 @@ const MovieDetail = ({ params }: TMovieDetail) => {
   }
 
   return (
-    <div className="flex flex-row bg-mainIndigo justify-center items-start w-screen text-center h-[100vh]">
+    <div className="flex flex-row bg-mainIndigo justify-center items-start w-screen text-center h-fit px-4 pb-4 min-h-screen">
       {movie && (
         <div className="flex flex-col justify-start items-center bg-darkGreen rounded-md px-4 py-4 max-w-2xl mt-10 pb-12">
           <div className="flex flex-row justify-between items-center text-center w-full pb-2">
