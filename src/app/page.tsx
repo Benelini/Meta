@@ -22,6 +22,7 @@ export default function Home() {
   const debouncedFetchMovies = async (term: string) => {
     const movies = await fetchMovies(term, apiKey);
     setMovieData(movies);
+    window.localStorage.setItem("lastSearchTerm", term);
   };
 
   useDebounce(searchTerm, 500, debouncedFetchMovies);
