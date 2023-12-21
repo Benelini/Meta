@@ -2,6 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import useDebounce from "./utils/use-debounce";
+import { fetchMovies } from "./utils/fetch-movies";
 
 type Movie = {
   Title: string;
@@ -12,48 +14,25 @@ type Movie = {
 };
 
 export default function Home() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const [movieData, setMovieData] = useState<Movie[]>([]);
+  const apiKey = process.env.NEXT_PUBLIC_OMDB_API_KEY || "";
 
-  // Fetch movies from OMDb API
-  const fetchMovies = async (searchValue: string) => {
-    const apiKey = process.env.NEXT_PUBLIC_OMDB_API_KEY;
-    const response = await fetch(
-      `http://www.omdbapi.com/?s=${encodeURIComponent(
-        searchValue
-      )}&apikey=${apiKey}`
-    );
-    const data = await response.json();
-    if (data.Search) {
-      setMovieData(data.Search);
-    } else {
-      setMovieData([]);
-    }
+  const debouncedFetchMovies = async (term: string) => {
+    const movies = await fetchMovies(term, apiKey);
+    setMovieData(movies);
   };
 
-  // Debouncing
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      if (searchTerm) {
-        fetchMovies(searchTerm);
-        window.localStorage.setItem("lastSearchTerm", searchTerm);
-      } else {
-        setMovieData([]);
-      }
-    }, 500);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [searchTerm]);
+  useDebounce(searchTerm, 500, debouncedFetchMovies);
 
   useEffect(() => {
     const lastSearchTerm = window.localStorage.getItem("lastSearchTerm");
     if (lastSearchTerm) {
       setSearchTerm(lastSearchTerm);
-      fetchMovies(lastSearchTerm);
+      debouncedFetchMovies(lastSearchTerm);
     }
   }, []);
+
   return (
     <main className="flex flex-col justify-start items-center p-4 bg-mainIndigo min-h-[100vh] h-fit">
       <input
@@ -73,13 +52,13 @@ export default function Home() {
                 alt={movie.Title}
                 width={75}
                 height={111}
-              ></Image>
-              <div className="flex flex-col ">
-                <Link href={`/movies/${movie.imdbID}`}>
-                  <h2 className="text-2xl max-sm:text-lg hover:underline">
-                    {movie.Title} <span className="block">({movie.Year})</span>
-                  </h2>
-                  <h2></h2>
+              />
+              <div className="flex flex-col">
+                <Link
+                  className="text-2xl max-sm:text-lg hover:underline"
+                  href={`/movies/${movie.imdbID}`}
+                >
+                  {movie.Title} <span className="block">({movie.Year})</span>
                 </Link>
               </div>
             </li>
