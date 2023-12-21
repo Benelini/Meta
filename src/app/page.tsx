@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import useDebounce from "./utils/use-debounce";
 import { fetchMovies } from "./utils/fetch-movies";
+import MovieResult from "./components/movie-result";
 
 type TSimpleMovie = {
   Title: string;
@@ -45,23 +46,7 @@ export default function Home() {
       {movieData && movieData.length > 0 && (
         <ul className="bg-darkGreen rounded-2xl">
           {movieData.map((movie) => (
-            <li className="flex flex-row mb-2 py-4 px-4" key={movie.imdbID}>
-              <Image
-                className="mr-4 rounded-md"
-                src={movie.Poster}
-                alt={movie.Title}
-                width={75}
-                height={111}
-              />
-              <div className="flex flex-col">
-                <Link
-                  className="text-2xl max-sm:text-lg hover:underline"
-                  href={`/movies/${movie.imdbID}`}
-                >
-                  {movie.Title} <span className="block">({movie.Year})</span>
-                </Link>
-              </div>
-            </li>
+            <MovieResult key={movie.imdbID} movie={movie} />
           ))}
         </ul>
       )}
