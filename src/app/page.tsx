@@ -57,7 +57,7 @@ export default function Home() {
   return (
     <main className="flex flex-col justify-start items-center p-4 bg-mainIndigo min-h-[100vh] h-fit">
       <input
-        className="text-black rounded-md w-1/3 py-2 text-2xl mb-4 px-2"
+        className="text-black rounded-md w-1/3 max-sm:w-full py-2 text-2xl mb-4 px-2"
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
@@ -76,9 +76,10 @@ export default function Home() {
               ></Image>
               <div className="flex flex-col ">
                 <Link href={`/movies/${movie.imdbID}`}>
-                  <h2>
-                    {movie.Title} ({movie.Year})
+                  <h2 className="text-2xl max-sm:text-lg">
+                    {movie.Title} <span className="block">({movie.Year})</span>
                   </h2>
+                  <h2></h2>
                 </Link>
               </div>
             </li>
