@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import useDebounce from "./utils/use-debounce";
 import { fetchMovies } from "./utils/fetch-movies";
 
-type Movie = {
+type TSimpleMovie = {
   Title: string;
   Year: string;
   imdbID: string;
@@ -15,7 +15,7 @@ type Movie = {
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [movieData, setMovieData] = useState<Movie[]>([]);
+  const [movieData, setMovieData] = useState<TSimpleMovie[]>([]);
   const apiKey = process.env.NEXT_PUBLIC_OMDB_API_KEY || "";
 
   const debouncedFetchMovies = async (term: string) => {
