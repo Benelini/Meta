@@ -117,10 +117,9 @@ const MovieDetail = ({ params }: TMovieDetail) => {
 
             <div className="flex flex-col font-bold text-left gap-1 max-sm:px-10">
               <p>{movie.Genre}</p>
-              <div className="flex flex-row place-items-center gap-1">
-                <p>{movie.Country}, </p>
-                <p>{movie.Year}</p>
-              </div>
+              <p className="flex flex-row place-items-center gap-1">
+                {movie.Country},{movie.Year}
+              </p>
 
               <p>
                 Director: <span className="font-normal">{movie.Director}</span>{" "}
