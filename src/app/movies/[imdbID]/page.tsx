@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { fetchMovieLong, TMovieLong } from "@/app/utils/fetch-movie-long";
+import { Movie } from "@/app/utils/fetch-movies";
 
 type TMovieDetail = {
   params: {
@@ -18,17 +19,17 @@ const MovieDetail = ({ params }: TMovieDetail) => {
   const [movie, setMovie] = useState<TMovieLong | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
   const addToFavorites = () => {
-    const currentFavoritesString =
-      window.localStorage.getItem("favorites") || "[]";
-    const currentFavorites = JSON.parse(currentFavoritesString);
+    const currentFavorites =
+      JSON.parse(window.localStorage.getItem("favorites") || "[]") || [];
 
-    // Check if movie is not null before adding it to the favorites
-    if (movie) {
+    // Check if the movie is already in the favorites list
+    if (
+      !currentFavorites.some(
+        (favoriteMovie: Movie) => favoriteMovie.imdbID === movie?.imdbID
+      )
+    ) {
       const newFavorites = [...currentFavorites, movie];
-
-      // Save the updated list back to local storage
       window.localStorage.setItem("favorites", JSON.stringify(newFavorites));
     }
   };
