@@ -41,7 +41,7 @@ export default function Home() {
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Search movies"
+        placeholder="Vyhledat film"
       />
       {movieData && movieData.length > 0 && (
         <ul className="bg-darkGreen rounded-2xl">
