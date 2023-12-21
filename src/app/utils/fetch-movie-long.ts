@@ -1,3 +1,4 @@
+"use server";
 export type TMovieLong = {
     Title: string;
     Year: string;
