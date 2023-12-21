@@ -76,7 +76,7 @@ export default function Home() {
               ></Image>
               <div className="flex flex-col ">
                 <Link href={`/movies/${movie.imdbID}`}>
-                  <h2 className="text-2xl max-sm:text-lg">
+                  <h2 className="text-2xl max-sm:text-lg hover:underline">
                     {movie.Title} <span className="block">({movie.Year})</span>
                   </h2>
                   <h2></h2>
