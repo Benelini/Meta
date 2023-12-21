@@ -6,7 +6,7 @@ import Link from "next/link";
 import Favorites from "./components/svgs/favorites";
 
 export const metadata: Metadata = {
-  title: "Eliáš Bencúr databáze filmů",
+  title: "Databáze filmů – Eliáš Bencúr",
   description: "Databáze filmů - testovací zadání Meta",
 };
 
