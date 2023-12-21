@@ -89,21 +89,21 @@ const MovieDetail = ({ params }: TMovieDetail) => {
             <Link className="py-2 text-4xl font-bold" href="/">
               <BackButton className="fill-white" />
             </Link>
-            <h1 className="text-4xl font-bold text-center w-full">
+            <h1 className="text-4xl max-sm:text-2xl font-bold text-center w-full">
               {movie.Title}
             </h1>
             <div className="w-6"></div>
           </div>
 
-          <div className="flex flex-row items-start justify-start">
+          <div className="flex flex-row items-start max-sm:flex-col max-sm:justify-center max-sm:items-center justify-start">
             <Image
-              className="mr-4 rounded-md"
+              className="mr-4 rounded-md max-sm:mr-0 max-sm:mb-4"
               src={movie.Poster}
               alt={movie.Title}
               width={260}
               height={400}
             ></Image>
-            <div className="flex flex-col font-bold text-left gap-1">
+            <div className="flex flex-col font-bold text-left gap-1 max-sm:px-10">
               <p>{movie.Genre}</p>
               <div className="flex flex-row place-items-center gap-1">
                 <p>{movie.Country}, </p>
