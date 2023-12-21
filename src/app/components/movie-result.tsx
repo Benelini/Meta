@@ -22,7 +22,7 @@ const MovieResult = ({ movie }: TSimpleMovie) => {
           className="mr-4 rounded-md"
         />
       ) : (
-        <div className="w-[74px] h-[111px] rounded-md mr-4 border-2 border-white text-center items-center flex flex-col justify-center">
+        <div className="w-[75px] min-w-[75px] h-[111px] rounded-md mr-4  border-2 border-white text-center items-center flex flex-col justify-center">
           <p>No image</p>
         </div>
       )}
