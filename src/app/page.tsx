@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <main className="flex flex-col justify-start items-center p-4 bg-mainIndigo min-h-[100vh] h-fit">
       <input
-        className="text-black rounded-md w-1/3 max-sm:w-full py-2 text-2xl mb-4 px-2"
+        className="text-black rounded-md max-w-5xl w-11/12 sm:w-[600px] py-2 text-2xl mb-4 px-2"
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
