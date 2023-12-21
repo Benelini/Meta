@@ -10,7 +10,7 @@ type TMovieDetail = {
   };
 };
 
-type Movie = {
+type TMovieLong = {
   Title: string;
   Year: string;
   Rated: string;
@@ -43,7 +43,7 @@ type Movie = {
 
 const MovieDetail = ({ params }: TMovieDetail) => {
   const { imdbID } = params;
-  const [movie, setMovie] = useState<Movie | null>(null); // Use the Movie type for state
+  const [movie, setMovie] = useState<TMovieLong | null>(null); // Use the Movie type for state
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -57,7 +57,7 @@ const MovieDetail = ({ params }: TMovieDetail) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data: Movie = await response.json(); // Cast the response to Movie type
+        const data: TMovieLong = await response.json(); // Cast the response to Movie type
         setMovie(data);
       } catch (err: any) {
         setError(err.message);
