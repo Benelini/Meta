@@ -109,7 +109,7 @@ const MovieDetail = ({ params }: TMovieDetail) => {
                 height={400}
               ></Image>
             ) : (
-              <div className="w-full h-[400px] rounded-md mr-4 max-sm:mr-0 border-2 border-white text-center items-center flex flex-col justify-center">
+              <div className="w-full min-w-[250px] h-[400px] rounded-md mr-4 max-sm:mr-0 border-2 border-white text-center items-center flex flex-col justify-center">
                 <p>No image</p>
               </div>
             )}
